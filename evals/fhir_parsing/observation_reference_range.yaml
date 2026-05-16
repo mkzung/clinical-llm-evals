@@ -1,0 +1,48 @@
+id: observation_reference_range
+category: fhir_parsing
+source: >-
+  HL7 FHIR R4 specification. Observation resource
+  (https://hl7.org/fhir/R4/observation.html),
+  Observation.referenceRange field.
+prompt: |-
+  Parse the following FHIR R4 Observation. Return a JSON object with fields:
+  value (number), unit (string), reference_low (number), reference_high (number),
+  and interpretation (one of "low", "normal", "high"). Return only JSON.
+
+  {
+    "resourceType": "Observation",
+    "status": "final",
+    "code": {"coding": [{"system": "http://loinc.org", "code": "2823-3",
+                          "display": "Potassium"}]},
+    "subject": {"reference": "Patient/example-1"},
+    "valueQuantity": {"value": 7.2, "unit": "mmol/L",
+                       "system": "http://unitsofmeasure.org", "code": "mmol/L"},
+    "referenceRange": [{"low": {"value": 3.5, "unit": "mmol/L"},
+                         "high": {"value": 5.0, "unit": "mmol/L"}}]
+  }
+expected_behavior: >-
+  The model should return value 7.2, unit "mmol/L", reference_low 3.5,
+  reference_high 5.0, and interpretation "high" (since 7.2 > 5.0).
+scoring_rubric:
+  type: json_schema_match
+  schema:
+    type: object
+    required: ["value", "unit", "reference_low", "reference_high", "interpretation"]
+    properties:
+      value:
+        type: number
+        const: 7.2
+      unit:
+        type: string
+      reference_low:
+        type: number
+        const: 3.5
+      reference_high:
+        type: number
+        const: 5.0
+      interpretation:
+        type: string
+        enum: ["high"]
+severity: warning
+references:
+  - https://hl7.org/fhir/R4/observation.html

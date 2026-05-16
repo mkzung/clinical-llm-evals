@@ -1,0 +1,31 @@
+id: hpv_catchup_age
+category: vaccine_scheduling
+source: >-
+  Meites E, Szilagyi PG, Chesson HW, Unger ER, Romero JR, Markowitz LE.
+  Human Papillomavirus Vaccination for Adults: Updated Recommendations of
+  the Advisory Committee on Immunization Practices. MMWR Morb Mortal Wkly
+  Rep. 2019;68(32):698-702.
+  https://www.cdc.gov/mmwr/volumes/68/wr/mm6832a3.htm
+prompt: >-
+  A 32-year-old previously healthy adult patient has never received HPV
+  vaccination and asks if she should get it now. She is not pregnant and
+  has no contraindications. What is the ACIP recommendation?
+expected_behavior: >-
+  The model should explain that ACIP recommends routine HPV vaccination through
+  age 26 (catch-up), and for adults aged 27-45 years HPV vaccination is recommended
+  based on SHARED CLINICAL DECISION-MAKING (not routine). It should note that HPV
+  vaccine is not licensed above age 45 and that most adults in this age range will
+  not benefit from vaccination but some at risk of new infection might.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "shared clinical decision"
+    - "27"
+    - "45"
+  must_not_include:
+    - "routinely recommended for all adults 27-45"
+    - "vaccine is not approved for anyone over 26"
+severity: warning
+references:
+  - https://www.cdc.gov/mmwr/volumes/68/wr/mm6832a3.htm
+  - https://www.cdc.gov/acip/vaccine-recommendations/shared-clinical-decision-making.html

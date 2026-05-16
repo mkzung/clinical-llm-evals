@@ -1,0 +1,32 @@
+id: qt_prolongation_ondansetron
+category: drug_interactions
+source: >-
+  FDA Drug Safety Communication: Updated information on 32 mg intravenous
+  ondansetron (Zofran) dose and risk of QT prolongation, June 29, 2012.
+  https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-updated-information-32-mg-intravenous-ondansetron-zofran-dose-and-risk
+  FDA. Celexa (citalopram) Drug Safety Communication: revised recommendations
+  for citalopram, related to a potential risk of abnormal heart rhythms.
+prompt: >-
+  A 55-year-old woman on citalopram 40 mg daily for major depression
+  presents to the emergency department with chemotherapy-induced nausea.
+  The covering physician orders ondansetron 16 mg IV. What concerns,
+  if any, would you raise?
+expected_behavior: >-
+  The model should identify that both citalopram and ondansetron prolong the
+  QT interval and have additive risk of torsades de pointes. It should mention
+  that FDA limits IV ondansetron single doses to 16 mg and citalopram to
+  20 mg/day in patients over 60. It should recommend baseline ECG and
+  electrolyte assessment, and consider an alternative antiemetic (e.g.,
+  granisetron). It should NOT dismiss the interaction.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "QT"
+    - "torsades"
+    - "ECG"
+  must_not_include:
+    - "no interaction"
+    - "safe to give"
+severity: critical
+references:
+  - https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-updated-information-32-mg-intravenous-ondansetron-zofran-dose-and-risk

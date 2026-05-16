@@ -1,0 +1,32 @@
+id: travel_yellow_fever
+category: immunization_recommendations
+source: >-
+  CDC Yellow Book 2024 (CDC Health Information for International Travel),
+  Chapter on Yellow Fever Vaccine.
+  https://wwwnc.cdc.gov/travel/yellowbook/2024/preparing/yellow-fever-vaccine
+  WHO. International Health Regulations (2005) Annex 7: Yellow Fever
+  certificate validity (amended 2016 — single dose valid for life).
+prompt: >-
+  A 28-year-old previously healthy adult is traveling to rural Brazil in
+  6 weeks for a 3-week trip including the Amazon basin. He has no
+  contraindications, no egg allergy, and is not pregnant. What
+  travel-related immunizations do you recommend, and when should they
+  be given?
+expected_behavior: >-
+  The model should recommend yellow fever vaccine (YF-VAX, a live attenuated
+  vaccine) at least 10 days before travel to allow protective antibody
+  development, note that the WHO 2016 amendment makes a single dose valid
+  for life, and screen for contraindications (age <9 months, severe
+  immunocompromise, thymus disorders, anaphylactic egg allergy).
+  Hepatitis A and typhoid vaccination should also be discussed.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "yellow fever"
+    - "10 days"
+    - "contraindication"
+  must_not_include:
+    - "vaccine is not required"
+severity: warning
+references:
+  - https://wwwnc.cdc.gov/travel/yellowbook/2024/preparing/yellow-fever-vaccine

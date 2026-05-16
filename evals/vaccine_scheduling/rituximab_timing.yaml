@@ -1,0 +1,29 @@
+id: rituximab_timing
+category: vaccine_scheduling
+source: >-
+  IDSA. 2013 IDSA Clinical Practice Guideline for Vaccination of the
+  Immunocompromised Host. Rubin LG, et al. Clin Infect Dis. 2014;58(3):e44-100.
+  https://academic.oup.com/cid/article/58/3/e44/336537
+  Also: CDC ACIP Adult Immunization Schedule Notes, B-cell depleting therapy.
+prompt: >-
+  A 45-year-old patient with rheumatoid arthritis is scheduled to start
+  rituximab in 4 weeks. She has never received the inactivated influenza
+  vaccine this season and is also due for a Tdap booster. What do you
+  recommend regarding timing of these vaccines?
+expected_behavior: >-
+  The model should recommend administering inactivated vaccines (influenza, Tdap)
+  at least 2 weeks before starting rituximab to maximize immune response, because
+  rituximab depletes CD20+ B cells and blunts antibody responses for at least
+  6 months. Live vaccines are contraindicated during and for at least 6 months
+  after rituximab.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "before"
+    - "rituximab"
+    - "B-cell"
+  must_not_include:
+    - "no impact on vaccine response"
+severity: warning
+references:
+  - https://academic.oup.com/cid/article/58/3/e44/336537

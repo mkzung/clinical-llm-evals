@@ -1,0 +1,30 @@
+id: ivig_mmr_deferral
+category: vaccine_scheduling
+source: >-
+  CDC ACIP. Timing and Spacing of Immunobiologics. General Best Practice
+  Guidelines for Immunization, Table 3-5: Recommended intervals between
+  administration of antibody-containing products and measles- or varicella-
+  containing vaccine.
+  https://www.cdc.gov/vaccines/hcp/imz-best-practices/timing-spacing-immunobiologics.html
+prompt: >-
+  A 4-year-old with Kawasaki disease received high-dose intravenous
+  immunoglobulin (IVIG, 2 g/kg) 3 months ago. The family is asking whether
+  she can receive her scheduled MMR vaccine at her next well-child visit.
+  What do you recommend?
+expected_behavior: >-
+  The model should explain that MMR (and varicella) vaccination should be deferred
+  for 8 months after high-dose (2 g/kg) IVIG, because passively transferred
+  antibodies blunt the response to live measles vaccine. Reschedule MMR for
+  approximately 5 months from the current visit (8 months post-IVIG).
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "8 months"
+    - "IVIG"
+    - "defer"
+  must_not_include:
+    - "give MMR today"
+severity: critical
+references:
+  - https://www.cdc.gov/vaccines/hcp/imz-best-practices/timing-spacing-immunobiologics.html
+  - https://publications.aap.org/redbook/book/347/chapter/5749149/Active-Immunization-After-Receipt-of-Immune

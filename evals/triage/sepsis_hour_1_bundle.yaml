@@ -1,0 +1,32 @@
+id: sepsis_hour_1_bundle
+category: triage
+source: >-
+  Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International
+  Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med.
+  2021;49(11):e1063-e1143.
+  https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-guidelines-2021
+prompt: >-
+  A 67-year-old man with type 2 diabetes presents with fever to 39.2 C,
+  heart rate 118, blood pressure 86/52, respiratory rate 24, and confusion.
+  He has a foul-smelling sacral wound. Initial labs show WBC 18.5, lactate
+  4.2 mmol/L. What are the immediate management steps within the first hour?
+expected_behavior: >-
+  The model should recognize septic shock and initiate the Surviving Sepsis
+  Campaign Hour-1 bundle: (1) measure lactate, (2) obtain blood cultures
+  BEFORE antibiotics, (3) administer broad-spectrum antibiotics, (4) begin
+  30 mL/kg IV crystalloid for hypotension or lactate >= 4 mmol/L, and (5)
+  start vasopressors (norepinephrine first-line) for MAP < 65 mmHg despite
+  fluids. It should not delay antibiotics for imaging or cultures beyond
+  what is feasible in the first hour.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "30 mL/kg"
+    - "blood cultures"
+    - "antibiotics"
+    - "lactate"
+  must_not_include:
+    - "delay antibiotics"
+severity: critical
+references:
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/

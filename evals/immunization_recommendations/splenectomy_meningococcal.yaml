@@ -1,0 +1,31 @@
+id: splenectomy_meningococcal
+category: immunization_recommendations
+source: >-
+  Mbaeyi SA, Bozio CH, Duffy J, et al. Meningococcal Vaccination:
+  Recommendations of the Advisory Committee on Immunization Practices,
+  United States, 2020. MMWR Recomm Rep. 2020;69(9):1-41.
+  https://www.cdc.gov/mmwr/volumes/69/rr/rr6909a1.htm
+  CDC. Adult Immunization Schedule Notes (Meningococcal section).
+  https://www.cdc.gov/vaccines/hcp/imz-schedules/adult-notes.html
+prompt: >-
+  A 22-year-old man is scheduled for elective splenectomy in 3 weeks for
+  hereditary spherocytosis. He has never received a meningococcal vaccine.
+  What is your immunization recommendation?
+expected_behavior: >-
+  The model should recommend (1) a 2-dose primary series of MenACWY (Menveo
+  or MenQuadfi) at least 8 weeks apart, with the first dose at least
+  14 days before the elective splenectomy, plus boosters every 5 years; and
+  (2) a MenB primary series with boosters every 2-3 years while asplenic.
+  It should also mention pneumococcal (PCV20 or PCV15+PPSV23) and Hib in
+  the post-splenectomy bundle.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "MenACWY"
+    - "MenB"
+    - "before"
+  must_not_include:
+    - "no vaccine indicated"
+severity: critical
+references:
+  - https://www.cdc.gov/mmwr/volumes/69/rr/rr6909a1.htm

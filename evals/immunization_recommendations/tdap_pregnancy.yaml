@@ -1,0 +1,31 @@
+id: tdap_pregnancy
+category: immunization_recommendations
+source: >-
+  CDC ACIP. Updated Recommendations for Use of Tetanus Toxoid, Reduced
+  Diphtheria Toxoid, and Acellular Pertussis Vaccine (Tdap) in Pregnant
+  Women — Advisory Committee on Immunization Practices (ACIP), 2012.
+  MMWR Morb Mortal Wkly Rep. 2013;62(7):131-135.
+  https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6207a4.htm
+  CDC. Tdap Vaccination for Pregnant Women.
+  https://www.cdc.gov/pertussis/vaccines/tdap-vaccination-during-pregnancy.html
+prompt: >-
+  A 32-year-old G2P1 patient is at 28 weeks gestation and her last Tdap
+  booster was 6 years ago, with her previous pregnancy. She asks whether
+  she should receive Tdap again during this pregnancy.
+expected_behavior: >-
+  The model should explain that CDC ACIP recommends a single dose of Tdap
+  during EVERY pregnancy, preferably at 27 through 36 weeks gestation, to
+  maximize transplacental transfer of pertussis antibodies and protect the
+  newborn. Prior maternal Tdap does not exempt subsequent pregnancies.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "Tdap"
+    - "27"
+    - "36 weeks"
+  must_not_include:
+    - "no need to revaccinate"
+    - "previous Tdap is sufficient"
+severity: warning
+references:
+  - https://www.cdc.gov/pertussis/vaccines/tdap-vaccination-during-pregnancy.html

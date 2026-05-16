@@ -1,0 +1,46 @@
+id: bundle_integrity
+category: fhir_parsing
+source: >-
+  HL7 FHIR R4 specification. Bundle resource
+  (https://hl7.org/fhir/R4/bundle.html), and the requirement that internal
+  references between entries must resolve to fullUrl/id values present in
+  the Bundle.
+prompt: |-
+  Validate this FHIR Bundle for internal reference integrity. Return JSON
+  with fields: valid (boolean), errors (array of strings). If any
+  Observation references a Patient that is not present in the Bundle,
+  the Bundle is invalid. Return only JSON.
+
+  {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {"fullUrl": "Patient/123",
+       "resource": {"resourceType": "Patient", "id": "123"}},
+      {"fullUrl": "Observation/abc",
+       "resource": {"resourceType": "Observation", "id": "abc",
+                    "status": "final", "code": {"text": "Heart rate"},
+                    "subject": {"reference": "Patient/999"}}}
+    ]
+  }
+expected_behavior: >-
+  The model should return valid=false with an errors array listing that
+  the Observation's subject reference (Patient/999) does not match any
+  Bundle entry. It must NOT report valid=true.
+scoring_rubric:
+  type: json_schema_match
+  schema:
+    type: object
+    required: ["valid", "errors"]
+    properties:
+      valid:
+        type: boolean
+        const: false
+      errors:
+        type: array
+        minItems: 1
+        items:
+          type: string
+severity: critical
+references:
+  - https://hl7.org/fhir/R4/bundle.html

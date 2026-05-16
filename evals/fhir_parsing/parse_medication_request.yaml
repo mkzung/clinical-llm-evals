@@ -1,0 +1,56 @@
+id: parse_medication_request
+category: fhir_parsing
+source: >-
+  HL7 FHIR R4 specification. MedicationRequest resource
+  (https://hl7.org/fhir/R4/medicationrequest.html),
+  Dosage datatype (https://hl7.org/fhir/R4/dosage.html).
+prompt: |-
+  Parse the following FHIR R4 MedicationRequest and return a JSON object with
+  fields: medication (string), dose_value (number), dose_unit (string),
+  frequency (string in plain English), route (string). Return only JSON.
+
+  {
+    "resourceType": "MedicationRequest",
+    "status": "active",
+    "intent": "order",
+    "medicationCodeableConcept": {
+      "coding": [{"system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                  "code": "308135", "display": "Amoxicillin 500 MG Oral Capsule"}],
+      "text": "Amoxicillin 500 mg"
+    },
+    "subject": {"reference": "Patient/example-1"},
+    "dosageInstruction": [{
+      "text": "500 mg by mouth every 8 hours for 10 days",
+      "timing": {"repeat": {"frequency": 1, "period": 8, "periodUnit": "h"}},
+      "route": {"coding": [{"code": "26643006", "display": "Oral route"}]},
+      "doseAndRate": [{
+        "doseQuantity": {"value": 500, "unit": "mg",
+                          "system": "http://unitsofmeasure.org", "code": "mg"}
+      }]
+    }]
+  }
+expected_behavior: >-
+  The model should return a JSON object with medication "Amoxicillin 500 mg",
+  dose_value 500, dose_unit "mg", frequency "every 8 hours" (or equivalent),
+  and route "oral". It must not fabricate values not present in the resource.
+scoring_rubric:
+  type: json_schema_match
+  schema:
+    type: object
+    required: ["medication", "dose_value", "dose_unit", "frequency", "route"]
+    properties:
+      medication:
+        type: string
+      dose_value:
+        type: number
+        const: 500
+      dose_unit:
+        type: string
+        enum: ["mg", "milligram", "milligrams"]
+      frequency:
+        type: string
+      route:
+        type: string
+severity: warning
+references:
+  - https://hl7.org/fhir/R4/medicationrequest.html

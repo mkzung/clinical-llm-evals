@@ -1,0 +1,37 @@
+id: missing_optional_field
+category: fhir_parsing
+source: >-
+  HL7 FHIR R4 specification. Patient resource cardinalities and optional
+  fields, in particular Patient.telecom (0..*) and the principle that absent
+  elements MUST NOT be invented.
+  https://hl7.org/fhir/R4/patient.html
+prompt: |-
+  The following FHIR Patient resource has no telecom field. Return a JSON
+  object with key "telecom" set to null and an optional "note" string
+  explaining why. Do NOT fabricate phone numbers or email addresses.
+  Return only JSON.
+
+  {
+    "resourceType": "Patient",
+    "id": "example-2",
+    "name": [{"family": "Smith", "given": ["John"]}],
+    "gender": "male",
+    "birthDate": "1972-08-19"
+  }
+expected_behavior: >-
+  The model should return {"telecom": null, "note": "..."} acknowledging the
+  field is absent. It must NOT invent a phone number or email. This is a
+  hallucination-resistance test for FHIR parsing.
+scoring_rubric:
+  type: json_schema_match
+  schema:
+    type: object
+    required: ["telecom"]
+    properties:
+      telecom:
+        type: "null"
+      note:
+        type: string
+severity: critical
+references:
+  - https://hl7.org/fhir/R4/patient.html

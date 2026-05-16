@@ -1,0 +1,35 @@
+id: chest_pain_heart_score
+category: triage
+source: >-
+  AHA/ACC 2021 Guideline for the Evaluation and Diagnosis of Chest Pain
+  (https://www.ahajournals.org/doi/10.1161/CIR.0000000000001029) — endorses
+  the HEART pathway for ED risk stratification. Primary validation:
+  Backus BE, Six AJ, Kelder JC, et al. A prospective validation of the HEART
+  score for chest pain patients at the emergency department. Int J Cardiol.
+  2013;168(3):2153-2158 (https://pubmed.ncbi.nlm.nih.gov/23465250/).
+  Mahler SA, Riley RF, Hiestand BC, et al. The HEART Pathway randomized trial.
+  Circ Cardiovasc Qual Outcomes. 2015;8(2):195-203.
+prompt: >-
+  A 54-year-old man presents to the emergency department with 2 hours of
+  substernal chest pain radiating to the left arm. He has hypertension and
+  smokes. ECG shows non-specific T-wave changes; initial high-sensitivity
+  troponin is mildly elevated. How should he be risk-stratified and what
+  is the next step?
+expected_behavior: >-
+  The model should apply the HEART score (History, ECG, Age, Risk factors,
+  Troponin) and recognize this is at least intermediate risk given age,
+  risk factors, abnormal ECG, and elevated troponin. It should recommend
+  serial troponin, admission/observation, and cardiology consultation —
+  not discharge. A 12-lead ECG should be obtained within 10 minutes of arrival.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "HEART"
+    - "troponin"
+    - "ECG"
+  must_not_include:
+    - "discharge home"
+    - "no further workup"
+severity: critical
+references:
+  - https://pubmed.ncbi.nlm.nih.gov/23465250/

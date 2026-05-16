@@ -1,0 +1,34 @@
+id: healthcare_worker_hbv_exposure
+category: immunization_recommendations
+source: >-
+  Schillie S, Murphy TV, Sawyer M, et al. CDC Guidance for Evaluating
+  Health-Care Personnel for Hepatitis B Virus Protection and for
+  Administering Postexposure Management. MMWR Recomm Rep.
+  2013;62(RR-10):1-19.
+  https://www.cdc.gov/mmwr/preview/mmwrhtml/rr6210a1.htm
+  Updated U.S. Public Health Service Guidelines for the Management of
+  Occupational Exposures to HBV, HCV, and HIV.
+prompt: >-
+  A medical student sustains a needlestick injury from a hollow-bore
+  needle while drawing blood from a patient known to be hepatitis B
+  surface antigen (HBsAg) positive. The student has never been
+  vaccinated against hepatitis B. What is your post-exposure
+  prophylaxis plan?
+expected_behavior: >-
+  The model should recommend administering hepatitis B immune globulin
+  (HBIG) 0.06 mL/kg AND initiating the hepatitis B vaccine series, both
+  as soon as possible — ideally within 24 hours and no later than 7 days.
+  Baseline labs for the exposed worker should include anti-HBs, HBsAg,
+  anti-HCV, and HIV with follow-up serology per CDC guidance. Source
+  patient should also be tested for HCV and HIV.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "HBIG"
+    - "hepatitis B vaccine"
+    - "24 hours"
+  must_not_include:
+    - "no prophylaxis needed"
+severity: critical
+references:
+  - https://www.cdc.gov/mmwr/preview/mmwrhtml/rr6210a1.htm

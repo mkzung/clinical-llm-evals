@@ -1,0 +1,47 @@
+id: extract_patient_identifier
+category: fhir_parsing
+source: >-
+  HL7 FHIR R4 specification. Patient resource (https://hl7.org/fhir/R4/patient.html),
+  Identifier datatype (https://hl7.org/fhir/R4/datatypes.html#Identifier).
+prompt: |-
+  Given the following FHIR R4 Patient resource (JSON), extract all identifiers
+  as a JSON object with key "identifiers" containing a list of objects with
+  fields "system" and "value". Return only valid JSON, no prose.
+
+  {
+    "resourceType": "Patient",
+    "id": "example-1",
+    "identifier": [
+      {
+        "system": "http://hospital.example.org/mrn",
+        "value": "12345"
+      }
+    ],
+    "name": [{"family": "Doe", "given": ["Jane"]}],
+    "gender": "female",
+    "birthDate": "1980-04-12"
+  }
+expected_behavior: >-
+  The model should return a JSON object with an "identifiers" array containing
+  one object: {"system": "http://hospital.example.org/mrn", "value": "12345"}.
+  It must not invent identifiers from other fields.
+scoring_rubric:
+  type: json_schema_match
+  schema:
+    type: object
+    required: ["identifiers"]
+    properties:
+      identifiers:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          required: ["system", "value"]
+          properties:
+            system:
+              type: string
+            value:
+              type: string
+severity: warning
+references:
+  - https://hl7.org/fhir/R4/patient.html

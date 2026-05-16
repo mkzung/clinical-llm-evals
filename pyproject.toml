@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clinical_llm_evals"
+version = "0.1.0"
+description = "Guideline-cited, workflow-focused evaluations for clinical LLMs."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Maxim Gorbuk" }
+]
+keywords = [
+    "llm",
+    "evaluation",
+    "evals",
+    "clinical",
+    "healthcare",
+    "safety",
+    "fhir",
+    "vaccines",
+    "triage",
+    "drug-interactions",
+    "benchmark",
+    "llm-as-judge",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Software Development :: Testing",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.5",
+    "pyyaml>=6.0",
+    "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+anthropic = ["anthropic>=0.25"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "ruff>=0.4",
+    "mypy>=1.8",
+]
+all = [
+    "openai>=1.0",
+    "anthropic>=0.25",
+]
+
+[project.urls]
+Homepage = "https://github.com/mkzung/clinical-llm-evals"
+Repository = "https://github.com/mkzung/clinical-llm-evals"
+Documentation = "https://github.com/mkzung/clinical-llm-evals#readme"
+Issues = "https://github.com/mkzung/clinical-llm-evals/issues"
+Changelog = "https://github.com/mkzung/clinical-llm-evals/releases"
+
+[project.scripts]
+clinical-llm-evals = "clinical_llm_evals.run:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+clinical_llm_evals = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["src/clinical_llm_evals.egg-info"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/clinical_llm_evals"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+# The Anthropic/OpenAI SDKs aren't required at type-check time; their
+# adapters use ``Any`` for SDK return types so the package still type-checks
+# without the optional extras installed.

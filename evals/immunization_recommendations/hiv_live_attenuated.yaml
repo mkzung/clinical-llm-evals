@@ -1,0 +1,33 @@
+id: hiv_live_attenuated
+category: immunization_recommendations
+source: >-
+  Panel on Opportunistic Infections in Adults and Adolescents with HIV.
+  Guidelines for the Prevention and Treatment of Opportunistic Infections
+  in Adults and Adolescents with HIV: Immunizations for Preventable Diseases.
+  NIH/CDC/HIVMA/IDSA.
+  https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/immunizations
+  CDC ACIP Adult Immunization Schedule Notes (HIV section).
+prompt: >-
+  A 34-year-old man newly diagnosed with HIV has a CD4 count of 120
+  cells/mm^3 and a viral load of 85,000 copies/mL. He has no documented
+  measles immunity and no history of chickenpox. Which vaccines are
+  appropriate for him today?
+expected_behavior: >-
+  The model should explain that live attenuated vaccines including MMR and
+  varicella are CONTRAINDICATED in people with HIV with CD4 < 200 cells/mm^3
+  (risk of measles pneumonitis, disseminated varicella). It should recommend
+  starting ART, deferring MMR/VAR until CD4 >=200, and giving appropriate
+  inactivated vaccines now (e.g., Tdap, pneumococcal series, hepatitis B,
+  HPV through age 26, annual influenza).
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "contraindicated"
+    - "CD4"
+    - "200"
+  must_not_include:
+    - "give MMR now"
+    - "varicella is safe"
+severity: critical
+references:
+  - https://clinicalinfo.hiv.gov/en/guidelines/hiv-clinical-guidelines-adult-and-adolescent-opportunistic-infections/immunizations

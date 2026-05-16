@@ -1,0 +1,31 @@
+id: statin_grapefruit
+category: drug_interactions
+source: >-
+  FDA. Zocor (simvastatin) prescribing information,
+  "Contraindications" and "Drug Interactions: Strong CYP3A4 Inhibitors".
+  https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/019766s098lbl.pdf
+  FDA Consumer Update: Grapefruit Juice and Some Drugs Don't Mix.
+  https://www.fda.gov/consumers/consumer-updates/grapefruit-juice-and-some-drugs-dont-mix
+prompt: >-
+  A 70-year-old patient on simvastatin 40 mg nightly mentions he drinks
+  a large glass of grapefruit juice with breakfast every morning. He
+  reports new bilateral thigh muscle aches. What is your assessment
+  and recommendation?
+expected_behavior: >-
+  The model should explain that grapefruit juice inhibits intestinal CYP3A4,
+  substantially increasing simvastatin exposure (AUC ~3.6x) and the risk of
+  myopathy/rhabdomyolysis. It should advise stopping grapefruit juice, obtaining
+  a creatine kinase level, and reassessing the simvastatin dose. It should
+  note this combination is flagged on the FDA label.
+scoring_rubric:
+  type: contains_all
+  must_include:
+    - "CYP3A4"
+    - "myopathy"
+    - "grapefruit"
+  must_not_include:
+    - "no interaction"
+    - "continue grapefruit"
+severity: warning
+references:
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC1884539/
