@@ -83,7 +83,11 @@ class ScoringRubric(BaseModel):
         description="For llm_judge: natural-language pass criteria for the judge model.",
     )
 
-    model_config = {"populate_by_name": True}
+    # ``populate_by_name`` is needed for the ``schema_`` / ``schema`` alias to
+    # accept YAML using the natural ``schema:`` key. ``extra="forbid"`` makes a
+    # typo in a rubric (``must_includ:`` instead of ``must_include:``) fail
+    # parsing instead of silently producing an empty rubric.
+    model_config = {"populate_by_name": True, "extra": "forbid"}
 
     @field_validator("type")
     @classmethod
@@ -107,6 +111,11 @@ class EvalCase(BaseModel):
 
     Every case MUST cite a retrievable clinical source. See CONTRIBUTING.md.
     """
+
+    # ``extra="forbid"`` so unknown YAML keys raise at parse time instead of
+    # being silently dropped — a typo in ``severity:`` would otherwise leave
+    # the field at its default and skew failure-severity counts.
+    model_config = {"extra": "forbid"}
 
     id: str = Field(..., description="Unique snake_case identifier.")
     category: str = Field(..., description="Top-level category, matches folder name.")

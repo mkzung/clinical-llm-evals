@@ -36,9 +36,9 @@ post-IVIG, asplenia, age cutoffs.
 guidelines for immunocompromised hosts.
 
 **Why this category exists.** Vaccine scheduling for non-standard patients is
-where MedAI (the maintainer's startup) focuses, and where commercial clinical
-LLMs frequently produce dangerous-but-confident output. It is also a domain
-where the ground truth is unusually well-specified.
+where commercial clinical LLMs frequently produce dangerous-but-confident
+output, and where the ground truth is unusually well-specified — a combination
+that makes it an unusually high-value target for a workflow-safety harness.
 
 **Out of scope.** Pediatric primary series for healthy children (well-covered
 elsewhere), country-specific schedules outside the US/EU, novel-vaccine first

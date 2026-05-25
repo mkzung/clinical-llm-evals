@@ -8,6 +8,7 @@ runtimes (Ollama, vLLM, llama.cpp) with a 10-line wrapper.
 from __future__ import annotations
 
 import os
+import threading
 from typing import Protocol, runtime_checkable
 
 
@@ -202,9 +203,15 @@ class MockClient:
             self.canned.update(canned)
         self.default = default
         self.calls: list[str] = []
+        # ``calls`` is appended to from worker threads when EvalRunner.run_parallel
+        # is used; without a lock, list growth in CPython is technically safe
+        # but call ordering is not, which makes assertions over ``calls`` flaky
+        # in user code. Cheap and explicit is better than relying on GIL trivia.
+        self._lock = threading.Lock()
 
     def complete(self, prompt: str) -> str:
-        self.calls.append(prompt)
+        with self._lock:
+            self.calls.append(prompt)
         lower = prompt.lower()
         # Iterate longest-key-first so more specific keys win over generic ones
         # (e.g., "internal reference integrity" beats "observation").

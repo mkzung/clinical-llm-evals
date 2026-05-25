@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "clinical-llm-evals: guideline-cited evaluations for clinical LLMs"
+abstract: >-
+  A guideline-cited, workflow-focused evaluation suite for clinical LLMs.
+  Every test case maps to a real published source
+  (CDC ACIP, FDA label, IDSA, ACOG, AAP, AHA, SCCM). Covers vaccine
+  scheduling, drug interactions, triage, FHIR parsing, and immunization
+  recommendations.
+type: software
+authors:
+  - family-names: "Gorbuk"
+    given-names: "Max"
+repository-code: "https://github.com/mkzung/clinical-llm-evals"
+url: "https://github.com/mkzung/clinical-llm-evals"
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-05-16"
+keywords:
+  - llm
+  - evaluation
+  - clinical
+  - healthcare
+  - safety
+  - fhir
+  - vaccines
+  - triage
+  - drug-interactions
+  - benchmark

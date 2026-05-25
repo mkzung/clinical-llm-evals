@@ -90,3 +90,32 @@ def test_runner_handles_missing_rubric_fields(tmp_path: Path) -> None:
 def test_mock_client_default_fallback() -> None:
     client = MockClient()
     assert client.complete("nothing here matches anything ever") == client.default
+
+
+def test_eval_case_rejects_unknown_field() -> None:
+    """``extra="forbid"`` must catch typo'd YAML keys at parse time.
+
+    Without this, a YAML with ``prompts:`` (instead of ``prompt:``) would
+    silently fail validation only on the empty ``prompt`` — but worse, a
+    misspelled ``severities:`` would skip the severity check entirely.
+    """
+    with pytest.raises(ValueError):
+        EvalCase(
+            id="x",
+            category="triage",
+            source="FDA label https://fda.gov/",
+            prompt="p",
+            expected_behavior="e",
+            scoring_rubric=ScoringRubric(type="exact_match", expected="z"),
+            severity="info",
+            severities="critical",  # typo — should reject  # type: ignore[call-arg]
+        )
+
+
+def test_scoring_rubric_rejects_unknown_field() -> None:
+    with pytest.raises(ValueError):
+        ScoringRubric(
+            type="contains_all",
+            must_include=["x"],
+            must_includ=["typo"],  # type: ignore[call-arg]
+        )

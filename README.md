@@ -187,12 +187,15 @@ If you use this in research or a product evaluation, please cite:
 
 ```bibtex
 @software{gorbuk_clinical_llm_evals_2026,
-  author  = {Gorbuk, Maxim},
+  author  = {Gorbuk, Max},
   title   = {clinical-llm-evals: guideline-cited evaluations for clinical LLMs},
   year    = {2026},
   url     = {https://github.com/mkzung/clinical-llm-evals}
 }
 ```
+
+A machine-readable [`CITATION.cff`](CITATION.cff) is also provided so GitHub's
+"Cite this repository" widget picks up the same metadata.
 
 ## Contributing
 
